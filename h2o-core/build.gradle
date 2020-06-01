@@ -39,6 +39,8 @@ dependencies {
     exclude group: 'org.mapdb', module: 'mapdb'
   }
 
+  compile 'org.codelibs:curl4j:1.2.4'
+
   testCompile project(':h2o-test-support')
   testRuntimeOnly project(":${defaultWebserverModule}")
   testCompileOnly "javax.servlet:javax.servlet-api:${servletApiVersion}"
