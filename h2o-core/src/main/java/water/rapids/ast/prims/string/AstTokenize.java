@@ -1,5 +1,8 @@
 package water.rapids.ast.prims.string;
 
+import org.apache.commons.lang.StringUtils;
+
+import hex.ElasticsearchTokenizer;
 import hex.RegexTokenizer;
 import water.MRTask;
 import water.fvec.*;
@@ -36,6 +39,15 @@ public class AstTokenize extends AstPrimitive {
         throw new IllegalArgumentException("tokenize() requires all input columns to be of a String type. "
                 + "Received " + fr.anyVec().get_type_str() + ". Please convert column to a string column first.");
 
+    if (regex.startsWith("tokenize:")) {
+      final String[] values = StringUtils.split(regex, ":", 3);
+      if(values.length == 3) {
+        if("elasticsearch".equals(values[1])) {
+          Frame tokenized = new ElasticsearchTokenizer(values[2]).transform(fr);
+          return new ValFrame(tokenized);
+        }
+      }
+    }
     Frame tokenized = new RegexTokenizer(regex).transform(fr);
     return new ValFrame(tokenized);
   }
