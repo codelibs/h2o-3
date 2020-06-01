@@ -39,6 +39,8 @@ dependencies {
     exclude group: 'org.mapdb', module: 'mapdb'
   }
 
+  compile 'org.codelibs:curl4j:1.2.4'
+
   testCompile "com.google.guava:guava:16.0.1"
   testCompile "junit:junit:${junitVersion}"
   testCompile "org.mockito:mockito-core:2.18.0"
